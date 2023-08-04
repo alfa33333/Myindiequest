@@ -30,21 +30,45 @@ namespace BonusMission
 
         static void WriteAllPermutations(List<string> items)
         {
-            var copyItems = items;
-            int total = Factorial(items.Count);
-            Console.WriteLine(total);
-            for (int i = 0; i <= total-1; i++)
+            //Console.WriteLine(string.Join(", ", items.GetRange(1, items.Count - 1)));
+
+            if (items.Count == 1)
             {
-                Console.WriteLine(string.Join(", ", copyItems));
-                //(copyItems[i], copyItems[j]) = (copyItems[j], copyItems[i]);
+                Console.WriteLine(String.Join(", ", items));
             }
-            
+            //else
+            //{
+            //    foreach (string item in items)
+            //    {
+            //        Console.WriteLine(WriteAllPermutations());
+            //    }
+            //}
+            //var copyItems = items;
+            //int total = Factorial(items.Count);
+            //Console.WriteLine(total);
+
+            //if (total == 1)
+            //{
+            //    Console.WriteLine(items);
+            //} else
+            //{
+            //    (copyItems[i], copyItems[j]) = (copyItems[j], copyItems[i]);
+            //    WriteAllPermutations()
+            //}
+
+            //for (int i = 0; i <= total-1; i++)
+            //{
+            //    Console.WriteLine(string.Join(", ", copyItems));
+            //    (copyItems[i], copyItems[j]) = (copyItems[j], copyItems[i]);
+            //}
+
         }
         static void Main(string[] args)
         {
             var names = new List<string>() { "Allie", "Ben", "Claire", "Dan", "Eleanor" };
-            var shornames = new List<string>() { "Allie", "Ben" };
-            WriteAllPermutations(shornames);
+            var shortnames = new List<string>() { "Allie", "Ben" };
+            WriteAllPermutations(shortnames);
+            Console.WriteLine(string.Join(", ", shortnames));
         }
     }
 }
