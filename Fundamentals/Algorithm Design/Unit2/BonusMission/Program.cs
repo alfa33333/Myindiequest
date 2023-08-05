@@ -18,13 +18,15 @@ namespace BonusMission
             }
         }
 
-        static void permute(List<string> preserveItems, List<string> items)
+        static void permute(List<string> preserveItems, List<string> items, ref int upCount)
         {
             if (items.Count == 1)
             {
                 preserveItems.Add(items[0]);
+                Console.Write(upCount+". ");
                 Console.WriteLine(string.Join(", ", preserveItems));
                 preserveItems.RemoveAt(preserveItems.Count-1);
+                upCount++;
             }
             else
             {
@@ -34,7 +36,7 @@ namespace BonusMission
                     string item = items[i];
                     preserveItems.Add(item);
                     items.RemoveAt(i);
-                    permute(preserveItems,items);
+                    permute(preserveItems,items, ref upCount);
                     items.Insert(i,item);
                     preserveItems.RemoveAt(preserveItems.Count-1);
                 }
@@ -44,13 +46,13 @@ namespace BonusMission
         static void WriteAllPermutations(List<string> items)
         {
             var preserveItem = new List<string>();
-            permute(preserveItem, items);
+            int nlayer = 1;
+            permute(preserveItem, items, ref nlayer);
 
         }
         static void Main(string[] args)
         {
-            var names = new List<string>() { "Allie", "Ben", "Claire", "Dan", "Eleanor" };
-            var shortnames = new List<string>() { "Allie", "Ben", "Claire" };
+            var shortnames = new List<string>() { "Allie", "Ben", "Claire", "Dan"};
             WriteAllPermutations(shortnames);
         }
     }
