@@ -1,21 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BonusMission
 {
     internal class Program
     {
-        static void ShuffleList(List<string> items)
-        {
-            Random rnd = new Random();
-            for (int i = items.Count - 1; i >= 1; i--)
-            {
-                int j = rnd.Next(0, i + 1);
-                (items[i], items[j]) = (items[j], items[i]);
-            }
-
-        }
-
         static int Factorial(int n)
         {
             if (n == 0)
@@ -28,45 +18,46 @@ namespace BonusMission
             }
         }
 
+        static void permute(List<string> preserveItems, List<string> permuteItems)
+        {
+            if (permuteItems.Count == 1)
+            {
+                Console.WriteLine(String.Join(", ", preserveItems));
+            } else
+            {
+                foreach (string item in preserveItems)
+                {
+                    preserveItems.Add(item);
+                    permute(preserveItems, permuteItems);
+                }
+                
+            }
+        }
+
         static void WriteAllPermutations(List<string> items)
         {
-            //Console.WriteLine(string.Join(", ", items.GetRange(1, items.Count - 1)));
-
+            var preItems = new List<string>();
             if (items.Count == 1)
             {
-                Console.WriteLine(String.Join(", ", items));
+                Console.WriteLine(string.Join("", items));
             }
-            //else
-            //{
-            //    foreach (string item in items)
-            //    {
-            //        Console.WriteLine(WriteAllPermutations());
-            //    }
-            //}
-            //var copyItems = items;
-            //int total = Factorial(items.Count);
-            //Console.WriteLine(total);
-
-            //if (total == 1)
-            //{
-            //    Console.WriteLine(items);
-            //} else
-            //{
-            //    (copyItems[i], copyItems[j]) = (copyItems[j], copyItems[i]);
-            //    WriteAllPermutations()
-            //}
-
-            //for (int i = 0; i <= total-1; i++)
-            //{
-            //    Console.WriteLine(string.Join(", ", copyItems));
-            //    (copyItems[i], copyItems[j]) = (copyItems[j], copyItems[i]);
-            //}
+            else
+            {
+                for (int i = 0; i < items.Count; i++)
+                {
+                    string item = items[i];
+                    Console.Write(item + ", ");
+                    items.RemoveAt(i);
+                    WriteAllPermutations(items);
+                    items.Insert(i, item);
+                }
+            }
 
         }
         static void Main(string[] args)
         {
             var names = new List<string>() { "Allie", "Ben", "Claire", "Dan", "Eleanor" };
-            var shortnames = new List<string>() { "Allie", "Ben" };
+            var shortnames = new List<string>() { "Allie", "Ben", "Claire" };
             WriteAllPermutations(shortnames);
             Console.WriteLine(string.Join(", ", shortnames));
         }
