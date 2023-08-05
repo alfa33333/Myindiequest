@@ -52,7 +52,6 @@ namespace BonusMission
             var names = new List<string>() { "Allie", "Ben", "Claire", "Dan", "Eleanor" };
             var shortnames = new List<string>() { "Allie", "Ben", "Claire" };
             WriteAllPermutations(shortnames);
-            Console.WriteLine(string.Join(", ", shortnames));
         }
     }
 }
