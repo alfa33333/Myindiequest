@@ -53,7 +53,10 @@ namespace BonusMission
         static void Main(string[] args)
         {
             var shortnames = new List<string>() { "Allie", "Ben", "Claire", "Dan"};
+            Console.WriteLine("Signed-up participants: "+String.Join(", ",shortnames));
+            Console.WriteLine("Starting orders:");
             WriteAllPermutations(shortnames);
+
         }
     }
 }
