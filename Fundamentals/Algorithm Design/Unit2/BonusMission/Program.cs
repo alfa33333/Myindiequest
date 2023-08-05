@@ -18,40 +18,33 @@ namespace BonusMission
             }
         }
 
-        static void permute(List<string> preserveItems, List<string> permuteItems)
+        static void permute(List<string> preserveItems, List<string> items)
         {
-            if (permuteItems.Count == 1)
+            if (items.Count == 1)
             {
-                Console.WriteLine(String.Join(", ", preserveItems));
-            } else
+                preserveItems.Add(items[0]);
+                Console.WriteLine(string.Join(", ", preserveItems));
+                preserveItems.RemoveAt(preserveItems.Count-1);
+            }
+            else
             {
-                foreach (string item in preserveItems)
+                int layer = items.Count;
+                for (int i = 0; i < layer; i++)
                 {
+                    string item = items[i];
                     preserveItems.Add(item);
-                    permute(preserveItems, permuteItems);
+                    items.RemoveAt(i);
+                    permute(preserveItems,items);
+                    items.Insert(i,item);
+                    preserveItems.RemoveAt(preserveItems.Count-1);
                 }
-                
             }
         }
 
         static void WriteAllPermutations(List<string> items)
         {
-            var preItems = new List<string>();
-            if (items.Count == 1)
-            {
-                Console.WriteLine(string.Join("", items));
-            }
-            else
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    string item = items[i];
-                    Console.Write(item + ", ");
-                    items.RemoveAt(i);
-                    WriteAllPermutations(items);
-                    items.Insert(i, item);
-                }
-            }
+            var preserveItem = new List<string>();
+            permute(preserveItem, items);
 
         }
         static void Main(string[] args)
